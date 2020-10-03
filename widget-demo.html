@@ -25,6 +25,7 @@
 		Fill the transaction ID field if you want! </br>
 		transaction ID: <input id="transaction_id" type="text" name="tr_id">
 	</p>
+	<button id="bt_id" name="bt_id"> UPDATE </button>
 
 	<div style="display: flex; justify-content: center;">
 		<div id="livechat" style="width: 300px; height: 400px;"></div>
@@ -42,15 +43,18 @@
 			j.src = `./build/rocketchat-livechat.min.js?_=202005260000`;
 			h.parentNode.insertBefore(j, h);
 			// DEV BUILD
-		})(window, document, 'script', 'http://81.163.30.249:3000/livechat');
+		})(window, document, 'script', 'http://80.249.146.135:3000/livechat');
 	</script>
 	<!-- End of Rocket.Chat Livechat Script -->
 	<script type="text/javascript">
+		window.RocketChat(function() {
+			this.setCustomField('transaction_id', '-');
+		});
+		const bt_input = document.getElementById('bt_id');
 		const id_input = document.getElementById('transaction_id');
-		id_input.addEventListener('change', () => {
+		bt_input.addEventListener('click', () => {
 			window.RocketChat(function() {
 				this.setCustomField('transaction_id', id_input.value);
-				this.removeCustomField('transaction_id');
 				this.maximizeWidget();
 				this.showWidget();
 			});
